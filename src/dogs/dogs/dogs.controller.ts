@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post } from '@nestjs/common';
 import { DogsService, CreateDogModel } from './dogs.service';
 import Dog from './dogs.service';
 import { addDogToList } from './dogs.service';
@@ -18,9 +18,9 @@ export class DogsController {
     /** 
      * GET Method, only get the data from one dog
      */
-    @Get('/:dogId')
-    getDogWithId(@Param('dogId') dogId): Dog {
-        return this.getAllDogs().find(dog => dog.id == dogId);
+    @Get('/:id')
+    getDogWithId(@Param('id') id): Dog {
+        return this.getAllDogs().find(dog => dog.id == id);
     }
 
     /** 
@@ -38,4 +38,11 @@ export class DogsController {
 
         return newDog;
     }
+
+    @Delete(':id')
+    @HttpCode(204)
+    delete(@Param('id') id: number) {
+        this.dogsService.delete(id);
+    }
+
 }

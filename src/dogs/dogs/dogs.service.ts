@@ -25,8 +25,12 @@ export class DogsService {
     getAllDogs(): Dog[] {
         return dogs;
     }
-}
 
+    delete(id: number): void {
+        dogs.splice(id, 1);
+        // delete dogs[id];
+    }
+}
 
 export function addDogToList(dog: Dog) {
     dogs.push(dog);
