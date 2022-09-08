@@ -26,9 +26,13 @@ export class DogsService {
         return dogs;
     }
 
-    delete(id: number): void {
+    deleteDog(id: number): void {
         dogs.splice(id, 1);
         // delete dogs[id];
+    }
+
+    updateDog(id: number, dogData: Dog): void {
+        dogs[id] = dogData;
     }
 }
 
