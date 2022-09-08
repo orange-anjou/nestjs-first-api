@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
 
-import dogs from '../../../resources/dogs.json';
+let dogs: Dog[];
+dogs = [
+    {
+        "id": 0,
+        "name": "bob",
+        "age": 1
+    },
+]
 
 export default interface Dog {
     id: number;
@@ -8,9 +15,19 @@ export default interface Dog {
     age: number;  
 }
 
+export interface CreateDogModel {
+    name: string;
+    age: number;
+}
+
 @Injectable()
 export class DogsService {
     getAllDogs(): Dog[] {
         return dogs;
     }
+}
+
+
+export function addDogToList(dog: Dog) {
+    dogs.push(dog);
 }
