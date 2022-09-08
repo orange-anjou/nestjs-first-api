@@ -64,7 +64,7 @@ export class DogsController {
      */
     @Put(':id')
     @HttpCode(200)
-    @Header('Content-Location', '/dogs/???')
+    @Header('Content-Location', '/dogs') // Can't find a way to specify the id in the path...
     updateDog(@Param('id') id: number, @Body() newDogData: CreateDogModel) {
         const newDog: Dog = {
             id: id,
