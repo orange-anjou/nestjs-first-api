@@ -77,6 +77,13 @@ export class DogsController {
         return newDog;        
     }
 
+    /**
+     * PATCH method : update an already exising dog by specifying it's id
+     * One, or many, attributes can be updated at the same. The request does not need to contain all the data about a dog.
+     * @param id 
+     * @param data 
+     * @returns 
+     */
     @Patch(':id')
     @HttpCode(200)
     patchDog(@Param('id') id: number, @Body() data: CreateDogModel) {
