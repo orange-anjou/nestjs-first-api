@@ -28,8 +28,9 @@ export class DogsController {
      */
     @Post()
     createDog(@Body() newDogData: CreateDogModel): Dog {
+        let dogList = this.getAllDogs();
         const newDog: Dog = {
-            id: this.getAllDogs().length,
+            id: dogList[dogList.length-1].id + 1,
             name: newDogData.name,
             age: newDogData.age
         };
