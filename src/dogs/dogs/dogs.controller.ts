@@ -1,7 +1,5 @@
-import { Body, Controller, Delete, Get, Header, HttpCode, Param, Patch, Post, Put } from '@nestjs/common';
-import { DogsService, CreateDogModel } from './dogs.service';
-import Dog from './dogs.service';
-import { addDogToList } from './dogs.service';
+import { BadRequestException, Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put } from '@nestjs/common';
+import { DogsService, CreateDogModel, Dog, addDogToList } from './dogs.service';
 
 @Controller('dogs')
 export class DogsController {
@@ -17,13 +15,23 @@ export class DogsController {
     }
 
     /**
-     * GET Method, only get the data from one dog
+     * GET Method, only get the data of one dog
      * @param id number used to identify a specific dog
      * @returns data about the dog chosen in a json format
      */
     @Get('/:id')
     getDogWithId(@Param('id') id): Dog {
-        return this.getAllDogs().find(dog => dog.id == id);
+        if (!Number(id) || id < 0) {
+            throw new BadRequestException({status: HttpStatus.BAD_REQUEST, error: 'Dog ID must be a positive number'});
+        }
+
+        let outputData = this.getAllDogs().find(dog => dog.id == id);
+
+        if (!outputData) {
+            throw new NotFoundException({status: HttpStatus.NOT_FOUND, error: `Dog with ID #${id} could not be found`});
+        }
+
+        return ;
     }
 
     /**

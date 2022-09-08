@@ -9,7 +9,7 @@ dogs = [
     },
 ]
 
-export default interface Dog {
+export interface Dog {
     id: number;
     name: string;
     age: number;  
