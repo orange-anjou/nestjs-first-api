@@ -77,5 +77,16 @@ export class DogsController {
         return newDog;        
     }
 
+    @Patch(':id')
+    @HttpCode(200)
+    patchDog(@Param('id') id: number, @Body() data: CreateDogModel) {
+        let storedDog = this.getDogWithId(id);
+        for (let key in data) {
+            storedDog[key] = data[key];
+        }
 
+        this.dogsService.updateDog(id, storedDog);
+
+        return storedDog;
+    }
 }
