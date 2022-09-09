@@ -1,5 +1,5 @@
 import { BadRequestException, Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put } from '@nestjs/common';
-import { DogsService, CreateDogModel, Dog, addDogToList } from './dogs.service';
+import { DogsService, DogDto, Dog, addDogToList } from './dogs.service';
 
 @Controller('dogs')
 export class DogsController {
@@ -40,7 +40,7 @@ export class DogsController {
      * @returns data about the dog just created in json format
      */
     @Post()
-    createDog(@Body() newDogData: CreateDogModel): Dog {
+    createDog(@Body() newDogData: DogDto): Dog {
         let dogList = this.getAllDogs();
         const newDog: Dog = {
             id: dogList[dogList.length-1].id + 1,
@@ -60,6 +60,10 @@ export class DogsController {
     @Delete(':id')
     @HttpCode(204)
     deleteDog(@Param('id') id: number) {
+        if (!Number(id) || id < 0) {
+            throw new BadRequestException({status: HttpStatus.BAD_REQUEST, error: 'Dog ID must be a positive number'});
+        }
+
         this.dogsService.deleteDog(id);
     }
 
@@ -73,7 +77,11 @@ export class DogsController {
     @Put(':id')
     @HttpCode(200)
     @Header('Content-Location', '/dogs') // Can't find a way to specify the id in the path...
-    updateDog(@Param('id') id: number, @Body() newDogData: CreateDogModel) {
+    updateDog(@Param('id') id: number, @Body() newDogData: DogDto) {
+        if (!Number(id) || id < 0) {
+            throw new BadRequestException({status: HttpStatus.BAD_REQUEST, error: 'Dog ID must be a positive number'});
+        }
+        
         const newDog: Dog = {
             id: id,
             name: newDogData.name,
@@ -94,7 +102,11 @@ export class DogsController {
      */
     @Patch(':id')
     @HttpCode(200)
-    patchDog(@Param('id') id: number, @Body() data: CreateDogModel) {
+    patchDog(@Param('id') id: number, @Body() data: DogDto) {
+        if (!Number(id) || id < 0) {
+            throw new BadRequestException({status: HttpStatus.BAD_REQUEST, error: 'Dog ID must be a positive number'});
+        }
+        
         let storedDog = this.getDogWithId(id);
         for (let key in data) {
             storedDog[key] = data[key];

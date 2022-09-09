@@ -15,7 +15,7 @@ export interface Dog {
     age: number;  
 }
 
-export interface CreateDogModel {
+export interface DogDto {
     name: string;
     age: number;
 }
