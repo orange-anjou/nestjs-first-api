@@ -40,7 +40,7 @@ export function addDogToList(dog: Dog) {
 }
 
 export function verifyDogId(id: number) {
-    if (!Number(id) || id < 0) {
-        throw new BadRequestException({status: HttpStatus.BAD_REQUEST, error: 'Dog ID must be a positive number'});
+    if (!Number.isInteger(id) && id < 0) {
+        throw new BadRequestException({status: HttpStatus.BAD_REQUEST, error: 'Dog ID must be a positive integer'});
     }
 }

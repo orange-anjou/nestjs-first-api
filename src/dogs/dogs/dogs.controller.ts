@@ -1,5 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put } from '@nestjs/common';
-import { DogIdPositiveNumberException } from '../exceptions/dog-id-positive-number.exception';
+import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put } from '@nestjs/common';
 import { DogsService, DogDto, Dog, addDogToList, verifyDogId } from './dogs.service';
 
 @Controller('dogs')
@@ -30,7 +29,7 @@ export class DogsController {
             throw new NotFoundException({status: HttpStatus.NOT_FOUND, error: `Dog with ID #${id} could not be found`});
         }
 
-        return ;
+        return outputData;
     }
 
     /**
