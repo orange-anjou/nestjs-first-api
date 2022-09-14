@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DogsController } from './dogs.controller';
-import { Dog, DogsService } from './dogs.service';
+import { DogsController } from './dogs.controller'; 
+// import { DogDTOStub } from '../stubs/dog.dto.stub';
 
 describe('DogsController', () => {
   let controller: DogsController;
@@ -13,11 +13,20 @@ describe('DogsController', () => {
     controller = module.get<DogsController>(DogsController);
   });
 
-  /*
-  it('get all dogs', () => {
-    const result: Dog = { id:4, name: "bob", age: 3};
-    jest.spyOn(DogsService, 'getAllDogs').mockImplementation(() => result);
+  /**
+   * Testing that the controller is defined
+   */
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  })
 
-    expect(DogsController.getAllDogs()).toBe(result);
-  }); */
+  /**
+   * Testing GET /dogs
+   */
+  describe('getAllDogs', () => {
+    it('should get all dogs', () => {
+        const result = [];
+        expect(controller.getAllDogs()).toBe(result);
+    });
+  })
 });
