@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put, Query, Version } from '@nestjs/common';
 import { DogsService, Dog, verifyDogId } from './dogs.service';
 import { CreateDogDTO } from '../dto/create-dog.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AppDataSource } from '../../../app-data-source'
 
 @ApiTags('dogs')
 @Controller('dogs')
@@ -15,8 +16,12 @@ export class DogsController {
     @ApiOperation({description: 'Get all dogs'})
     @ApiResponse({status: 200, description: 'Returns a list of dogs, each one in json format'})
     @ApiResponse({status: 404, description: 'Resource not found'})
+    @Version('1')
     @Get()
     getAllDogs(@Query() params: {age: Number}): Dog[] {
+        let value = AppDataSource.manager.findOneBy(Dog, {id: 1});
+        console.log(value);
+
         if (!params.age) {
             return this.dogsService.getAllDogs();
         } else {
@@ -40,6 +45,7 @@ export class DogsController {
             example: 10,
             type: '',
     })
+    @Version('1')
     @Get('/:id')
     getDogWithId(@Param('id') id): Dog {
         verifyDogId(id);
@@ -58,6 +64,7 @@ export class DogsController {
      * @param newDogData data in json format used to create a new dog
      * @returns data about the dog just created in json format
      */
+    @Version('1')
     @Post()
     createDog(@Body() newDogData: CreateDogDTO): Dog {
         let dogList = this.dogsService.getAllDogs();
@@ -77,6 +84,7 @@ export class DogsController {
      * DELETE method : delete a dog by using it's id
      * @param id positive integer used to identify a specific dog
      */
+    @Version('1')
     @Delete(':id')
     @HttpCode(204)
     deleteDog(@Param('id') id: number) {
@@ -91,6 +99,7 @@ export class DogsController {
      * @param newDogData data in json format used to create a new dog
      * @returns data about the dog just created in json format
      */
+    @Version('1')
     @Put(':id')
     @HttpCode(200)
     @Header('Content-Location', "/dogs/${@Param('id')}") // Verify that it works
@@ -116,6 +125,7 @@ export class DogsController {
      * @param newDogData data in json format used to create a new dog
      * @returns data about the dog just created in json format
      */
+    @Version('1')
     @Patch(':id')
     @HttpCode(200)
     patchDog(@Param('id') id: number, @Body() newDogData: CreateDogDTO) {

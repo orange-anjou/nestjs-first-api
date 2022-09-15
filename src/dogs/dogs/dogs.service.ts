@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DogIdPositiveNumberException } from '../exceptions/dog-id-positive-number.exception';
-import { PrimaryGeneratedColumn, Column, Entity, OneToOne } from 'typeorm'
+import { PrimaryGeneratedColumn, Column, Entity, OneToOne } from '@nestjs/typeorm'
 
 let dogs: Dog[];
 dogs = [

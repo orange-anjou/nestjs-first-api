@@ -4,6 +4,7 @@ export const DogDTOStub = (): DogDTO => {
     return {
         id: 1,
         name: "doggy",
-        age: 3
+        age: 3,
+        personId: 3
     }
 }

@@ -1,0 +1,40 @@
+version: "2.1"
+
+services:
+  backend:
+    container_name: dog_api_container
+    restart: always
+    build: .
+    environment:
+      - APP_ENV=development
+      - APP_PORT=9000
+    volumes:
+      - ./src:/var/www/myapp/src
+      - ./test:/var/www/myapp/test
+    working_dir: /var/www/myapp
+    ports:
+      - "9001:9000"
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+  maria_db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: dog_api_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    
+    volumes: 
+        - ./init:/docker-entrypoint-initdb.d
+
+volumes:
+  myapp_mysql_data:
+
+networks:
+  default:
+    external:
+      name: myapp

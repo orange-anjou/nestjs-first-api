@@ -3,8 +3,10 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as fs from 'fs';
 import { join } from 'path';
+import { VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
+  // Setup HTTPS
   let key: Buffer;
   let cert: Buffer;
   try {
@@ -22,7 +24,13 @@ async function bootstrap() {
     , {
       httpsOptions,
     });
+
+  // Setup versioning of the API in the URI
+  app.enableVersioning({
+    type: VersioningType.URI,
+  })
   
+  // Setup the Swagger documentation
   const config = new DocumentBuilder()
     .setTitle('Dogs API')
     .setDescription('The dogs API description')
@@ -32,6 +40,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);
 
+  // Run the API
   await app.listen(3000);
 }
 bootstrap();
