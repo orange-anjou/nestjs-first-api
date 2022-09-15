@@ -64,7 +64,8 @@ export class DogsController {
         const newDog: Dog = {
             id: dogList[dogList.length-1].id + 1,
             name: newDogData.name,
-            age: newDogData.age
+            age: newDogData.age,
+            personId: newDogData.personId,
         };
 
         this.dogsService.addDogToList(newDog);
@@ -99,7 +100,8 @@ export class DogsController {
         const newDog: Dog = {
             id: id,
             name: newDogData.name,
-            age: newDogData.age
+            age: newDogData.age,
+            personId: newDogData.personId,
         };
 
         this.dogsService.updateDog(id, newDog);

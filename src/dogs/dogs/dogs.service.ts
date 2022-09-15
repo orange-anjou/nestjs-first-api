@@ -1,39 +1,44 @@
-import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { DogIdPositiveNumberException } from '../exceptions/dog-id-positive-number.exception';
+import { PrimaryGeneratedColumn, Column, Entity, OneToOne } from 'typeorm'
 
 let dogs: Dog[];
 dogs = [
     {
-        "id": 0,
-        "name": "bob",
-        "age": 1
-    },
-    {
         "id": 1,
-        "name": "doggy",
-        "age": 5
+        "name": "Max",
+        "age": 5,
+        "personId": 3 
     },
     {
         "id": 2,
         "name": "doggo",
-        "age": 5
+        "age": 5,
+        "personId": 2
     },
     {
         "id": 3,
         "name": "dog",
-        "age": 12
+        "age": 12,
+        "personId": 4 
     },
 ]
 
-export interface Dog {
+@Entity()
+export class Dog {
+    @PrimaryGeneratedColumn()
     id: number;
-    name: string;
-    age: number;  
-}
 
-export interface DogDto {
+    @Column({
+        length: 50,
+    })
     name: string;
-    age: number;
+
+    @Column("int")
+    age: number;  
+
+    @OneToOne(() => Number)
+    personId: Number;
 }
 
 @Injectable()

@@ -2,7 +2,7 @@ import { IsAlpha, IsInt, MaxLength, Min, MinLength } from 'class-validator';
 
 export class DogDTO {
     @IsInt()
-    @Min(0)
+    @Min(1)
     id: number;
 
     @IsAlpha()
@@ -17,4 +17,8 @@ export class DogDTO {
     @IsInt()
     @Min(1)
     age: number;
+
+    @IsInt()
+    @Min(1)
+    personId: number;
 }
