@@ -1,12 +1,14 @@
 import { DataSource } from "typeorm"
+import { Dog } from "./dogs/entity/Dog"
 
 export const AppDataSource = new DataSource({
     "type": "mariadb",
     "host": "localhost",
     "port": 3306,
     "username": "root",
-    "password": "my-secret-pw",
+    "password": "1234",
     "database": "dog_api_db",
+    "entities": [Dog],
 })
 
 AppDataSource.initialize()

@@ -6,14 +6,14 @@ LABEL maintainer="maintainer@domain.com"
 WORKDIR /var/www/backend
 
 # Install app dependencies
-COPY package.json package-lock.lock ./
+COPY package.json package-lock.json ./
 RUN npm ci
 
 # Copy important files
-COPY .eslintrc.js nest-cli.json tsconfig.json tsconfig.build.json ormconfig.ts ./
+COPY .eslintrc.js nest-cli.json tsconfig.json tsconfig.build.json ormconfig.json ./
 
 # Copy env
-COPY .env.docker /var/www/backend/.env
+#COPY .env.docker /var/www/backend/.env
 
 # Add storage folder to the container (If you want to add other folder contents to the container)
 # ADD storage /var/www/backend/storage

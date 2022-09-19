@@ -9,15 +9,16 @@ services:
       - APP_ENV=development
       - APP_PORT=9000
     volumes:
-      - ./src:/var/www/myapp/src
-      - ./test:/var/www/myapp/test
-    working_dir: /var/www/myapp
+      - ./src:/var/www/backend/src
+      - ./test:/var/www/backend/test
+      - ./secrets:/var/www/backend/secrets
+    working_dir: /var/www/backend
     ports:
       - "9001:9000"
     links:
-      - mysql
+      - maria_db
     depends_on:
-      - mysql
+      - maria_db
 
   maria_db:
     image: mariadb
@@ -27,14 +28,7 @@ services:
       MYSQL_DATABASE: dog_api_db
       MYSQL_USER: user
       MYSQL_PASSWORD: user
-    
+    ports:
+      - "3036:3036"
     volumes: 
         - ./init:/docker-entrypoint-initdb.d
-
-volumes:
-  myapp_mysql_data:
-
-networks:
-  default:
-    external:
-      name: myapp

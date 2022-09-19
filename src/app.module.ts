@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DogsModule } from './dogs/dogs.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Dog } from './dogs/dogs/dogs.service';
+import { Dog } from './dogs/entity/Dog';
 
 @Module({
   controllers: [AppController],

@@ -8,7 +8,7 @@ CREATE TABLE dog
 (
 	id INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(50),
-	age TINYINT,
+	age TINYINT UNSIGNED,
 	person_id INT,
 	CONSTRAINT person_id
 	    FOREIGN KEY (person_id) REFERENCES person (person_id)

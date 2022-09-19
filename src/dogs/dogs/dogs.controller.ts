@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundException, Param, Patch, Post, Put, Query, Version } from '@nestjs/common';
-import { DogsService, Dog, verifyDogId } from './dogs.service';
+import { DogsService, verifyDogId } from './dogs.service';
 import { CreateDogDTO } from '../dto/create-dog.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AppDataSource } from '../../../app-data-source'
+import { AppDataSource } from '../../app-data-source'
+import { Dog } from 'src/dogs/entity/Dog';
 
 @ApiTags('dogs')
 @Controller('dogs')

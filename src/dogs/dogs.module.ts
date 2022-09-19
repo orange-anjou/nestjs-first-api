@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { Dog, DogsService } from './dogs/dogs.service';
+import { DogsService } from './dogs/dogs.service';
 import { DogsController } from './dogs/dogs.controller';
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { Dog } from 'src/dogs/entity/Dog';
 
 @Module({
   providers: [DogsService],

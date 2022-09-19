@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Dog } from 'src/dogs/entity/Dog';
 import { DogIdPositiveNumberException } from '../exceptions/dog-id-positive-number.exception';
-import { PrimaryGeneratedColumn, Column, Entity, OneToOne } from '@nestjs/typeorm'
 
 let dogs: Dog[];
 dogs = [
@@ -23,23 +23,6 @@ dogs = [
         "personId": 4 
     },
 ]
-
-@Entity()
-export class Dog {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @Column({
-        length: 50,
-    })
-    name: string;
-
-    @Column("int")
-    age: number;  
-
-    @OneToOne(() => Number)
-    personId: Number;
-}
 
 @Injectable()
 export class DogsService {
