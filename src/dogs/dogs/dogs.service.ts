@@ -26,11 +26,11 @@ dogs = [
 
 @Injectable()
 export class DogsService {
-    getAllDogs(): Dog[] {
+    getAll(): Dog[] {
         return dogs;
     }
 
-    getAllDogsByAge(age: Number): Dog[] {
+    getAllByAge(age: Number): Dog[] {
         let dogList = [];
         for (let dog of dogs) {
             if (dog.age == age) {
@@ -40,15 +40,15 @@ export class DogsService {
         return dogList;
     }
 
-    deleteDog(id: number): void {
+    delete(id: number): void {
         dogs.splice(id, 1);
     }
 
-    updateDog(id: number, dogData: Dog): void {
+    update(id: number, dogData: Dog): void {
         dogs[id] = dogData;
     }
 
-    addDogToList(dog: Dog) {
+    add(dog: Dog) {
         dogs.push(dog);
     }
 }

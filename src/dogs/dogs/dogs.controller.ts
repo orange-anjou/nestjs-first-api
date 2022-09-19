@@ -24,9 +24,9 @@ export class DogsController {
         console.log(value);
 
         if (!params.age) {
-            return this.dogsService.getAllDogs();
+            return this.dogsService.getAll();
         } else {
-            return this.dogsService.getAllDogsByAge(params.age);
+            return this.dogsService.getAllByAge(params.age);
         }
     }
 
@@ -51,7 +51,7 @@ export class DogsController {
     getDogWithId(@Param('id') id): Dog {
         verifyDogId(id);
 
-        let outputData = this.dogsService.getAllDogs().find(dog => dog.id == id); // ou const
+        let outputData = this.dogsService.getAll().find(dog => dog.id == id); // ou const
 
         if (!outputData) {
             throw new NotFoundException({status: HttpStatus.NOT_FOUND, error: `Dog with ID #${id} could not be found`});
@@ -68,7 +68,7 @@ export class DogsController {
     @Version('1')
     @Post()
     createDog(@Body() newDogData: CreateDogDTO): Dog {
-        let dogList = this.dogsService.getAllDogs();
+        let dogList = this.dogsService.getAll();
         const newDog: Dog = {
             id: dogList[dogList.length-1].id + 1,
             name: newDogData.name,
@@ -76,7 +76,7 @@ export class DogsController {
             personId: newDogData.personId,
         };
 
-        this.dogsService.addDogToList(newDog);
+        this.dogsService.add(newDog);
 
         return newDog;
     }
@@ -90,7 +90,7 @@ export class DogsController {
     @HttpCode(204)
     deleteDog(@Param('id') id: number) {
         verifyDogId(id);
-        this.dogsService.deleteDog(id);
+        this.dogsService.delete(id);
     }
 
     /**
@@ -114,7 +114,7 @@ export class DogsController {
             personId: newDogData.personId,
         };
 
-        this.dogsService.updateDog(id, newDog);
+        this.dogsService.update(id, newDog);
 
         return newDog;        
     }
@@ -137,7 +137,7 @@ export class DogsController {
             storedDog[key] = newDogData[key];
         }
 
-        this.dogsService.updateDog(id, storedDog);
+        this.dogsService.update(id, storedDog);
 
         return storedDog;
     }
