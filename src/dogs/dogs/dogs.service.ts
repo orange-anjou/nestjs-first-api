@@ -26,8 +26,13 @@ dogs = [
 
 @Injectable()
 export class DogsService {
+     
     getAll(): Dog[] {
         return dogs;
+    }
+
+    getOneById(id: number): Dog {
+        return 
     }
 
     getAllByAge(age: Number): Dog[] {

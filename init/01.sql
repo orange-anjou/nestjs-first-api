@@ -3,6 +3,14 @@ CREATE DATABASE IF NOT EXISTS dog_api_db;
 GRANT ALL ON dog_api_db.* TO user;
 USE dog_api_db;
 
+-- Create the table person
+CREATE TABLE person
+(
+	person_id INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50)
+);
+
 -- Create the dog table
 CREATE TABLE dog
 (
@@ -12,14 +20,6 @@ CREATE TABLE dog
 	person_id INT,
 	CONSTRAINT person_id
 	    FOREIGN KEY (person_id) REFERENCES person (person_id)
-);
-
--- Create the table person
-CREATE TABLE person
-(
-	person_id INT NOT NULL UNIQUE AUTO_INCREMENT PRIMARY KEY,
-	first_name VARCHAR(50),
-	last_name VARCHAR(50)
 );
 
 -- Add multiple persons to the person table
@@ -35,5 +35,5 @@ VALUES ('Max', 12, 3),
 	 ('Charlie', 3, 4),
 	 ('Cooper', 4, 4),
 	 ('Milo', 5, 3),
-	 ('Rocky', 2, 5),
+	 ('Rocky', 2, 1),
 	 ('Tucker', 8, 4);

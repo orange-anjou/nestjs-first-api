@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Header, HttpCode, HttpStatus, NotFoundEx
 import { DogsService, verifyDogId } from './dogs.service';
 import { CreateDogDTO } from '../dto/create-dog.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AppDataSource } from '../../app-data-source'
+// import { AppDataSource } from '../../app-data-source'
 import { Dog } from 'src/dogs/entity/Dog';
 
 @ApiTags('dogs')
@@ -20,8 +20,8 @@ export class DogsController {
     @Version('1')
     @Get()
     getAllDogs(@Query() params: {age: Number}): Dog[] {
-        let value = AppDataSource.manager.findOneBy(Dog, {id: 1});
-        console.log(value);
+        // let value = AppDataSource.manager.findOneBy(Dog, {id: 1});
+        // console.log(value);
 
         if (!params.age) {
             return this.dogsService.getAll();

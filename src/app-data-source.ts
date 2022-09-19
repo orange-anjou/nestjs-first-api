@@ -1,10 +1,11 @@
-import { DataSource } from "typeorm"
+// import { DataSource } from "typeorm"
 import { Dog } from "./dogs/entity/Dog"
 
+/**
 export const AppDataSource = new DataSource({
-    "type": "mariadb",
+    "type": "mysql2",
     "host": "localhost",
-    "port": 3306,
+    "port": 3305,
     "username": "root",
     "password": "1234",
     "database": "dog_api_db",
@@ -17,4 +18,4 @@ AppDataSource.initialize()
     })
     .catch((err) => {
         console.error("Error during Data Source initialization", err)
-    })
+    }) */

@@ -1,12 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import * as fs from 'fs';
-import { join } from 'path';
 import { VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
+  
+
   // Setup HTTPS
+  /** 
   let key: Buffer;
   let cert: Buffer;
   try {
@@ -18,11 +19,11 @@ async function bootstrap() {
   const httpsOptions = {
     key: key,
     cert: cert,
-  }
+  } */
 
   const app = await NestFactory.create(AppModule
     , {
-      httpsOptions,
+      // httpsOptions,
     });
 
   // Setup versioning of the API in the URI

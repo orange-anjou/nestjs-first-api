@@ -1,5 +1,9 @@
 version: "2.1"
 
+networks:
+  network-dog:
+    external: true
+
 services:
   backend:
     container_name: dog_api_container
@@ -19,6 +23,8 @@ services:
       - maria_db
     depends_on:
       - maria_db
+    networks:
+      - network-dog
 
   maria_db:
     image: mariadb
@@ -29,6 +35,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     ports:
-      - "3036:3036"
+      - "3305:3306"
     volumes: 
         - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - network-dog

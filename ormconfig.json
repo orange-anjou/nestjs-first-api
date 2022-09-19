@@ -1,8 +1,8 @@
 {
-    "type": "mariadb",
+    "type": "mysql2",
     "host": "localhost",
-    "port": 3306,
+    "port": 3305,
     "username": "root",
-    "password": "my-secret-pw",
+    "password": "1234",
     "database": "dog_api_db"
  }

@@ -10,16 +10,7 @@ import { Dog } from './dogs/entity/Dog';
   providers: [AppService],
   imports: [
     DogsModule,
-    TypeOrmModule.forRoot({
-      type: "mariadb",
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "my-secret-pw",
-      database: "dog_api_db",
-      entities: [Dog],
-      synchronize: true,
-    }),
+    // TypeOrmModule.forRoot(),
   ],
 })
 export class AppModule {}
